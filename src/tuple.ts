@@ -33,8 +33,17 @@ export const isVector = (t: Tuple): boolean => {
   return t.w === 0;
 };
 
-export const add = (a: Tuple, b: Tuple): Tuple => {
-  return tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+export const add = (...tuples: Tuple[]): Tuple => {
+  return tuples.reduce(
+    (acc, current) =>
+      tuple(
+        acc.x + current.x,
+        acc.y + current.y,
+        acc.z + current.z,
+        acc.w + current.w
+      ),
+    tuple(0, 0, 0, 0)
+  );
 };
 
 export const subtract = (a: Tuple, b: Tuple): Tuple => {
