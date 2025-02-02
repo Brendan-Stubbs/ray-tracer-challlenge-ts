@@ -3,21 +3,21 @@ import {
   cross,
   divide,
   dot,
-  isPoint,
   isVector,
   magnitude,
   multiply,
   negate,
   normalize,
   subtract,
-  tuple,
+  coordinate,
   vector,
   point,
-} from "../src/tuple";
+  isPoint,
+} from "../src/tuples/Coordinate";
 
 describe("Tuples", () => {
   it("A tuple with w=1 is a point", () => {
-    const result = tuple(4.3, -4.2, 3.1, 1.0);
+    const result = coordinate(4.3, -4.2, 3.1, 1.0);
     expect(result.x).toBe(4.3);
     expect(result.y).toBe(-4.2);
     expect(result.z).toBe(3.1);
@@ -27,7 +27,7 @@ describe("Tuples", () => {
   });
 
   it("A tuple with w=0 is a vector", () => {
-    const result = tuple(4.3, -4.2, 3.1, 0.0);
+    const result = coordinate(4.3, -4.2, 3.1, 0.0);
     expect(result.x).toBe(4.3);
     expect(result.y).toBe(-4.2);
     expect(result.z).toBe(3.1);
@@ -47,8 +47,8 @@ describe("Tuples", () => {
   });
 
   it("Adding two tuples", () => {
-    const a = tuple(3, -2, 5, 1);
-    const b = tuple(-2, 3, 1, 0);
+    const a = coordinate(3, -2, 5, 1);
+    const b = coordinate(-2, 3, 1, 0);
     const result = add(a, b);
     expect(result.x).toBe(1);
     expect(result.y).toBe(1);
@@ -85,27 +85,27 @@ describe("Tuples", () => {
   });
 
   it("Negating a tuple", () => {
-    const a = tuple(1, -2, 3, -4);
+    const a = coordinate(1, -2, 3, -4);
     const result = negate(a);
-    expect(result).toStrictEqual(tuple(-1, 2, -3, 4));
+    expect(result).toStrictEqual(coordinate(-1, 2, -3, 4));
   });
 
   it("Multiplying a tuple by a scalar", () => {
-    const a = tuple(1, -2, 3, -4);
+    const a = coordinate(1, -2, 3, -4);
     const result = multiply(a, 3.5);
-    expect(result).toStrictEqual(tuple(3.5, -7, 10.5, -14));
+    expect(result).toStrictEqual(coordinate(3.5, -7, 10.5, -14));
   });
 
   it("Multiplying a tuple by a fraction", () => {
-    const a = tuple(1, -2, 3, -4);
+    const a = coordinate(1, -2, 3, -4);
     const result = multiply(a, 0.5);
-    expect(result).toStrictEqual(tuple(0.5, -1, 1.5, -2));
+    expect(result).toStrictEqual(coordinate(0.5, -1, 1.5, -2));
   });
 
   it("Dividing a tuple by a scalar", () => {
-    const a = tuple(1, -2, 3, -4);
+    const a = coordinate(1, -2, 3, -4);
     const result = divide(a, 2);
-    expect(result).toStrictEqual(tuple(0.5, -1, 1.5, -2));
+    expect(result).toStrictEqual(coordinate(0.5, -1, 1.5, -2));
   });
 
   it("Computing the magnitude of vector(1, 0, 0)", () => {

@@ -1,12 +1,12 @@
-import { Environment } from "./environment";
-import { add, Tuple } from "./tuple";
+import { Environment } from "./Environment";
+import { add, Point, Vector } from "./tuples/Coordinate";
 
 export type Projectile = {
-  position: Tuple; // Point
-  velocity: Tuple; // Vector
+  position: Point;
+  velocity: Vector;
 };
 
-export const projectile = (position: Tuple, velocity: Tuple): Projectile => {
+export const projectile = (position: Point, velocity: Vector): Projectile => {
   return { position, velocity };
 };
 
