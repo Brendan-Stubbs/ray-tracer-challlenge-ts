@@ -1,6 +1,6 @@
-import { environment } from "./environment";
-import { projectile, tick } from "./projectile";
-import { normalize, point, vector } from "./tuple";
+import { environment } from "./Environment";
+import { projectile, tick } from "./Projectile";
+import { normalize, point, vector } from "./tuples/Coordinate";
 
 const p = projectile(point(0, 1, 0), normalize(vector(1, 1, 0)));
 const e = environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
