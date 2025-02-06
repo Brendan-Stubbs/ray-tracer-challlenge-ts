@@ -21,3 +21,35 @@ export const scaleColorComponents = (color: Color, depth: number) => {
     blue: calculateScale(color.blue, totalColorSize),
   };
 };
+
+export const flattenPixel = (color: Color) => {
+  return [color.red, color.green, color.blue];
+};
+
+export const convertRowToString = (row: number[], maxLength: number) => {
+  let output: string[] = [];
+  let currentRow = "";
+
+  row.forEach((color) => {
+    const colorString = color.toString();
+
+    if (
+      currentRow.length +
+        colorString.length +
+        (currentRow.length > 0 ? 1 : 0) <=
+      maxLength
+    ) {
+      const stringToConcat = currentRow ? ` ${colorString}` : colorString;
+      currentRow = currentRow.concat(stringToConcat);
+    } else {
+      output.push(currentRow);
+      currentRow = colorString;
+    }
+  });
+
+  if (currentRow.length > 0) {
+    output.push(currentRow);
+  }
+
+  return output;
+};

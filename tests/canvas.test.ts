@@ -27,7 +27,7 @@ describe("Canvas", () => {
     expect(ppm.split("\n").slice(0, 3)).toStrictEqual(expectedLines);
   });
 
-  it("Constructing the PPM pixel data TEMP", () => {
+  it("Constructing the PPM pixel data", () => {
     const c = canvas(5, 3);
     const c1 = color(1.5, 0, 0);
     const c2 = color(0, 0.5, 0);
