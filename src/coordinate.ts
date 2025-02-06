@@ -1,12 +1,18 @@
-import { Tuple } from "./Tuple";
+import { Tuple } from "./tuple";
 
 export type Coordinate = Point | Vector;
 
 export interface Point extends Tuple {
+  x: number;
+  y: number;
+  z: number;
   w: number;
 }
 
 export interface Vector extends Tuple {
+  x: number;
+  y: number;
+  z: number;
   w: number;
 }
 

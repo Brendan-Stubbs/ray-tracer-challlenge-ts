@@ -1,5 +1,5 @@
-import { Environment } from "./Environment";
-import { add, Point, Vector } from "./tuples/Coordinate";
+import { Environment } from "./environment";
+import { add, Point, Vector } from "./coordinate";
 
 export type Projectile = {
   position: Point;

@@ -1,9 +1,8 @@
-import { Vector } from "./tuples/Coordinate";
-import { Tuple } from "./tuples/Tuple";
+import { Vector } from "./coordinate";
 
 export type Environment = {
-  gravity: Vector; // Vector
-  wind: Vector; // Vector
+  gravity: Vector;
+  wind: Vector;
 };
 
 export const environment = (gravity: Vector, wind: Vector): Environment => {
