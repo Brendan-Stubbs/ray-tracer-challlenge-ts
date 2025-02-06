@@ -1,4 +1,4 @@
-import { Tuple } from "./Tuple";
+import { Tuple } from "./tuple";
 
 export type Coordinate = Point | Vector;
 

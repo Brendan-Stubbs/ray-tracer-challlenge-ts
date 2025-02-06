@@ -1,9 +1,9 @@
 import * as fs from "fs";
-import { canvas, canvasToPPM, writePixel } from "./Canvas";
-import { color } from "./Color";
-import { environment } from "./Environment";
-import { projectile, tick } from "./Projectile";
-import { normalize, point, vector, multiply } from "./tuples/Coordinate";
+import { canvas, canvasToPPM, writePixel } from "./canvas";
+import { color } from "./color";
+import { environment } from "./environment";
+import { projectile, tick } from "./projectile";
+import { normalize, point, vector, multiply } from "./coordinate";
 
 const start = point(0, 1, 0);
 const velocity = multiply(normalize(vector(1, 1.8, 0)), 11.25);

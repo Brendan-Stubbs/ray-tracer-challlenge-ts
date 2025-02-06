@@ -4,7 +4,3 @@ export interface Tuple {
   z: number;
   w?: number;
 }
-
-// export interface Tuple {
-//   [key: string]: number;
-// }

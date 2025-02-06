@@ -13,7 +13,7 @@ import {
   vector,
   point,
   isPoint,
-} from "../src/tuples/Coordinate";
+} from "../src/coordinate";
 
 describe("Tuples", () => {
   it("A tuple with w=1 is a point", () => {
