@@ -1,4 +1,11 @@
-import { equals, get, Matrix, matrixMultiply } from "../src/matrix";
+import { coordinate } from "../src/coordinate";
+import {
+  equals,
+  get,
+  Matrix,
+  matrixMultiply,
+  multiplyMatrixByCoordinate,
+} from "../src/matrix";
 
 describe("Matrix", () => {
   it("Constructing and inspecting a 4x4 matrix", () => {
@@ -103,5 +110,21 @@ describe("Matrix", () => {
     const result = matrixMultiply(a, b);
 
     expect(equals(result, expectedResult)).toBe(true);
+  });
+
+  it("A matrix multiplied by a tuple", () => {
+    const a = [
+      [1, 2, 3, 4],
+      [2, 4, 4, 2],
+      [8, 6, 4, 1],
+      [0, 0, 0, 1],
+    ];
+
+    const b = coordinate(1, 2, 3, 1);
+    const expectedResult = coordinate(18, 24, 33, 1);
+
+    const result = multiplyMatrixByCoordinate(a, b);
+
+    expect(result).toStrictEqual(expectedResult);
   });
 });

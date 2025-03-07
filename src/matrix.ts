@@ -1,3 +1,5 @@
+import { coordinate, Coordinate } from "./coordinate";
+
 export type Matrix = number[][];
 
 export const get = (m: Matrix, row: number, col: number): number => {
@@ -5,7 +7,19 @@ export const get = (m: Matrix, row: number, col: number): number => {
 };
 
 export const equals = (a: Matrix, b: Matrix): boolean => {
-  return JSON.stringify(a) === JSON.stringify(b);
+  if (a.length !== b.length || a[0].length !== b[0].length) {
+    return false;
+  }
+
+  for (let i = 0; i < a.length; i++) {
+    for (let j = 0; j < a[i].length; j++) {
+      if (a[i][j] !== b[i][j]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 };
 
 export const matrixMultiply = (a: Matrix, b: Matrix): Matrix => {
@@ -22,4 +36,15 @@ export const matrixMultiply = (a: Matrix, b: Matrix): Matrix => {
   }
 
   return result;
+};
+
+export const multiplyMatrixByCoordinate = (a: Matrix, b: Coordinate) => {
+  const convertedB = [[b.x], [b.y], [b.z], [b.w]];
+  const result = matrixMultiply(a, convertedB);
+  const x = result[0][0];
+  const y = result[1][0];
+  const z = result[2][0];
+  const w = result[3][0];
+
+  return coordinate(x, y, z, w);
 };
