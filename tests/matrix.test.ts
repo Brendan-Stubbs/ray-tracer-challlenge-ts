@@ -2,9 +2,11 @@ import { coordinate } from "../src/coordinate";
 import {
   equals,
   get,
+  IDENTITY_MATRIX,
   Matrix,
   matrixMultiply,
   multiplyMatrixByCoordinate,
+  transposeMatrix,
 } from "../src/matrix";
 
 describe("Matrix", () => {
@@ -126,5 +128,38 @@ describe("Matrix", () => {
     const result = multiplyMatrixByCoordinate(a, b);
 
     expect(result).toStrictEqual(expectedResult);
+  });
+
+  it("Multiplying a matrix by the identity matrix", () => {
+    const a = [
+      [0, 1, 2, 4],
+      [1, 2, 4, 8],
+      [2, 4, 8, 16],
+      [4, 8, 16, 32],
+    ];
+
+    const result = matrixMultiply(a, IDENTITY_MATRIX);
+
+    expect(equals(a, result)).toBe(true);
+  });
+
+  it("Transposing a matrix", () => {
+    const a = [
+      [0, 9, 3, 0],
+      [9, 8, 0, 8],
+      [1, 8, 5, 3],
+      [0, 0, 5, 8],
+    ];
+
+    const expectedResult = [
+      [0, 9, 1, 0],
+      [9, 8, 8, 0],
+      [3, 0, 5, 5],
+      [0, 8, 3, 8],
+    ];
+
+    const result = transposeMatrix(a);
+
+    expect(equals(result, expectedResult)).toBe(true);
   });
 });

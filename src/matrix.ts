@@ -48,3 +48,22 @@ export const multiplyMatrixByCoordinate = (a: Matrix, b: Coordinate) => {
 
   return coordinate(x, y, z, w);
 };
+
+export const IDENTITY_MATRIX: Matrix = [
+  [1, 0, 0, 0],
+  [0, 1, 0, 0],
+  [0, 0, 1, 0],
+  [0, 0, 0, 1],
+];
+
+export const transposeMatrix = (m: Matrix): Matrix => {
+  const output: Matrix = m.map((row) => [...row]);
+
+  for (let i = 0; i < m.length; i++) {
+    for (let j = 0; j < m.length; j++) {
+      output[j][i] = m[i][j];
+    }
+  }
+
+  return output;
+};
