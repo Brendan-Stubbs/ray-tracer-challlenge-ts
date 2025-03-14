@@ -1,11 +1,13 @@
 import { coordinate } from "../src/coordinate";
 import {
+  determinant,
   equals,
   get,
   IDENTITY_MATRIX,
   Matrix,
   matrixMultiply,
   multiplyMatrixByCoordinate,
+  submatrix,
   transposeMatrix,
 } from "../src/matrix";
 
@@ -159,6 +161,52 @@ describe("Matrix", () => {
     ];
 
     const result = transposeMatrix(a);
+
+    expect(equals(result, expectedResult)).toBe(true);
+  });
+
+  it("Calculating the determinant of a 2x2 matrix", () => {
+    const a = [
+      [1, 5],
+      [-3, 2],
+    ];
+
+    const result = determinant(a);
+    expect(result).toBe(17);
+  });
+
+  it("A submatrix of a 3x3 matrix is a 2x2 matrix", () => {
+    const input = [
+      [1, 5, 0],
+      [-3, 2, 7],
+      [0, 6, -3],
+    ];
+
+    const expectedResult = [
+      [-3, 2],
+      [0, 6],
+    ];
+
+    const result = submatrix(input, 0, 2);
+
+    expect(equals(result, expectedResult)).toBe(true);
+  });
+
+  it("A submatrix of a 4x4 matrix is a 3x3 matrix", () => {
+    const input = [
+      [-6, 1, 1, 6],
+      [-8, 5, 8, 6],
+      [-1, 0, 8, 2],
+      [-7, 1, -1, 1],
+    ];
+
+    const expectedResult = [
+      [-6, 1, 6],
+      [-8, 8, 6],
+      [-7, -1, 1],
+    ];
+
+    const result = submatrix(input, 2, 1);
 
     expect(equals(result, expectedResult)).toBe(true);
   });

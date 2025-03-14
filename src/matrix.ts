@@ -67,3 +67,32 @@ export const transposeMatrix = (m: Matrix): Matrix => {
 
   return output;
 };
+
+// NB this currently only supports 2x2 matrices
+export const determinant = (m: Matrix) => {
+  return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+};
+
+export const submatrix = (m: Matrix, row: number, column: number) => {
+  const output: Matrix = [];
+
+  for (let i = 0; i < m.length; i++) {
+    if (i === row) {
+      continue;
+    }
+    let currentRow: number[] | undefined;
+    for (let j = 0; j <= m[i].length; j++) {
+      if (j === column) {
+        continue;
+      }
+
+      currentRow = currentRow ? currentRow : [];
+      currentRow.push(m[i][j]);
+    }
+    if (currentRow) {
+      output.push(currentRow.filter((item) => item !== undefined));
+    }
+  }
+
+  return output;
+};
