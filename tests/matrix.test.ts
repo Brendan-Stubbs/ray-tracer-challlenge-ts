@@ -232,4 +232,33 @@ describe("Matrix", () => {
     expect(cofactor(A, 0, 0)).toBe(-12);
     expect(cofactor(A, 1, 0)).toBe(-25);
   });
+
+  it("Calculating the determinant of a 3x3 matrix", () => {
+    const A = [
+      [1, 2, 6],
+      [-5, 8, -4],
+      [2, 6, 4],
+    ];
+
+    expect(cofactor(A, 0, 0)).toBe(56);
+    expect(cofactor(A, 0, 1)).toBe(12);
+    expect(cofactor(A, 0, 2)).toBe(-46);
+    expect(determinant(A)).toBe(-196);
+  });
+
+  it("Calculating the determinant of a 4x4 Matrix", () => {
+    const A = [
+      [-2, -8, 3, 5],
+      [-3, 1, 7, 3],
+      [1, 2, -9, 6],
+      [-6, 7, 7, -9],
+    ];
+
+    expect(cofactor(A, 0, 0)).toBe(690);
+    expect(cofactor(A, 0, 1)).toBe(447);
+    expect(cofactor(A, 0, 2)).toBe(210);
+    expect(cofactor(A, 0, 3)).toBe(51);
+
+    expect(determinant(A)).toBe(-4071);
+  });
 });

@@ -68,9 +68,17 @@ export const transposeMatrix = (m: Matrix): Matrix => {
   return output;
 };
 
-// NB this currently only supports 2x2 matrices
 export const determinant = (m: Matrix) => {
-  return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+  if (m.length === 2) {
+    return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+  }
+
+  let det = 0;
+  for (let j = 0; j < m[0].length; j++) {
+    det += m[0][j] * cofactor(m, 0, j);
+  }
+
+  return det;
 };
 
 export const submatrix = (m: Matrix, row: number, column: number) => {
@@ -104,5 +112,5 @@ export const minor = (m: Matrix, row: number, column: number) => {
 
 export const cofactor = (m: Matrix, row: number, column: number) => {
   const minorM = minor(m, row, column);
-  return row + (column % 1) === 0 ? minorM : -minorM;
+  return row + (column % 2) === 0 ? minorM : -minorM;
 };
