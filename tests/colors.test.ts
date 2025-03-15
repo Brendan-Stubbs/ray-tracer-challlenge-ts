@@ -1,4 +1,10 @@
-import { add, color, hadamardProduct, multiply, subtract } from "../src/color";
+import {
+  add,
+  color,
+  hadamardProduct,
+  multiply,
+  subtract,
+} from "../src/color.m";
 
 describe("colors", () => {
   it("Color ares (red, green, blue) tuples", () => {

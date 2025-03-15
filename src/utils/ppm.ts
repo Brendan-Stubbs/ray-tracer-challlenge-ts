@@ -1,4 +1,4 @@
-import { Color } from "../color";
+import { Color } from "../color.m";
 
 export const calculateScale = (color: number, depth: number) => {
   if (color < 0) {

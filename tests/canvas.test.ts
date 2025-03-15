@@ -1,5 +1,5 @@
-import { canvas, canvasToPPM, pixelAt, writePixel } from "../src/canvas";
-import { color } from "../src/color";
+import { canvas, canvasToPPM, pixelAt, writePixel } from "../src/canvas.m";
+import { color } from "../src/color.m";
 
 describe("Canvas", () => {
   it("Creating a canvas", () => {
