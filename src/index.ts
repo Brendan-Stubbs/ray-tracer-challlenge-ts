@@ -1,6 +1,6 @@
 import * as fs from "fs";
-import { canvas, canvasToPPM, writePixel } from "./canvas.m";
-import { color } from "./color.m";
+import { canvas, canvasToPPM, writePixel } from "./canvas";
+import { color } from "./color";
 import { environment } from "./environment";
 import { projectile, tick } from "./projectile";
 import { normalize, point, vector, multiply } from "./coordinate";

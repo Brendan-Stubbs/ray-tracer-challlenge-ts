@@ -1,4 +1,4 @@
-import { Color } from "./color.m";
+import { Color } from "./color";
 import {
   convertRowToString,
   flattenPixel,
