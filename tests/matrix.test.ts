@@ -5,6 +5,8 @@ import {
   equals,
   get,
   IDENTITY_MATRIX,
+  inverse,
+  isInvertible,
   matrixMultiply,
   minor,
   multiplyMatrixByCoordinate,
@@ -218,7 +220,6 @@ describe("Matrix", () => {
       [2, -1, -7],
       [6, -1, 5],
     ];
-    const b = submatrix(input, 1, 0);
     expect(minor(input, 1, 0)).toBe(25);
   });
 
@@ -231,6 +232,17 @@ describe("Matrix", () => {
 
     expect(cofactor(A, 0, 0)).toBe(-12);
     expect(cofactor(A, 1, 0)).toBe(-25);
+  });
+
+  it("Calculating a cofactor of a 4x4 matrix", () => {
+    const input = [
+      [-5, 2, 6, -8],
+      [1, -5, 1, 8],
+      [7, 7, -6, -7],
+      [1, -3, 7, 4],
+    ];
+    const result = cofactor(input, 1, 1);
+    expect(result).toBe(-775);
   });
 
   it("Calculating the determinant of a 3x3 matrix", () => {
@@ -260,5 +272,46 @@ describe("Matrix", () => {
     expect(cofactor(A, 0, 3)).toBe(51);
 
     expect(determinant(A)).toBe(-4071);
+  });
+
+  it("Testing an invertible matrix for invertability", () => {
+    const input = [
+      [6, 4, 4, 4],
+      [5, 5, 7, 6],
+      [4, -9, 3, -7],
+      [9, 1, 7, -6],
+    ];
+
+    expect(isInvertible(input)).toBe(true);
+  });
+
+  it("Testing a noninvertable matrix for invertability", () => {
+    const input = [
+      [-4, 2, -2, -3],
+      [9, 6, 2, 6],
+      [0, -5, 1, -5],
+      [0, 0, 0, 0],
+    ];
+
+    expect(isInvertible(input)).toBe(false);
+  });
+
+  it("Calculating the inverse of a matrix", () => {
+    const a = [
+      [-5, 2, 6, -8],
+      [1, -5, 1, 8],
+      [7, 7, -6, -7],
+      [1, -3, 7, 4],
+    ];
+
+    const expectedResult = [
+      [0.21805, 0.45113, 0.2406, -0.04511],
+      [-0.80827, -1.45677, -0.44361, 0.52068],
+      [-0.07895, -0.22368, -0.05263, 0.19737],
+      [-0.52256, -0.81391, -0.30075, 0.30639],
+    ];
+
+    const result = inverse(a);
+    expect(equals(result, expectedResult)).toBe(true);
   });
 });

@@ -6,19 +6,18 @@ export const get = (m: Matrix, row: number, col: number): number => {
   return m[row][col];
 };
 
-export const equals = (a: Matrix, b: Matrix): boolean => {
+export const equals = (a: Matrix, b: Matrix, epsilon = 1e-5): boolean => {
   if (a.length !== b.length || a[0].length !== b[0].length) {
     return false;
   }
 
   for (let i = 0; i < a.length; i++) {
     for (let j = 0; j < a[i].length; j++) {
-      if (a[i][j] !== b[i][j]) {
+      if (Math.abs(a[i][j] - b[i][j]) > epsilon) {
         return false;
       }
     }
   }
-
   return true;
 };
 
@@ -112,5 +111,27 @@ export const minor = (m: Matrix, row: number, column: number) => {
 
 export const cofactor = (m: Matrix, row: number, column: number) => {
   const minorM = minor(m, row, column);
-  return row + (column % 2) === 0 ? minorM : -minorM;
+  return (row + column) % 2 === 0 ? minorM : -minorM;
+};
+
+export const isInvertible = (m: Matrix) => {
+  return determinant(m) !== 0;
+};
+
+export const inverse = (m: Matrix) => {
+  if (!isInvertible(m)) {
+    throw new Error("Matrix not invertible");
+  }
+  const determinantM = determinant(m);
+
+  const m2: Matrix = m.map((row) => [...row]);
+
+  for (let i = 0; i < m.length; i++) {
+    for (let j = 0; j < m.length; j++) {
+      const c = cofactor(m, i, j);
+      m2[j][i] = c / determinantM;
+    }
+  }
+
+  return m2;
 };
