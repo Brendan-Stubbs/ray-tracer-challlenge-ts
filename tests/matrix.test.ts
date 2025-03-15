@@ -1,11 +1,12 @@
 import { coordinate } from "../src/coordinate";
 import {
+  cofactor,
   determinant,
   equals,
   get,
   IDENTITY_MATRIX,
-  Matrix,
   matrixMultiply,
+  minor,
   multiplyMatrixByCoordinate,
   submatrix,
   transposeMatrix,
@@ -209,5 +210,26 @@ describe("Matrix", () => {
     const result = submatrix(input, 2, 1);
 
     expect(equals(result, expectedResult)).toBe(true);
+  });
+
+  it("Calculating a minor of a 3x3 matrix", () => {
+    const input = [
+      [3, 5, 0],
+      [2, -1, -7],
+      [6, -1, 5],
+    ];
+    const b = submatrix(input, 1, 0);
+    expect(minor(input, 1, 0)).toBe(25);
+  });
+
+  it("Calculating a cofactor of a 3x3 matrix", () => {
+    const A = [
+      [3, 5, 0],
+      [2, -1, -7],
+      [6, -1, 5],
+    ];
+
+    expect(cofactor(A, 0, 0)).toBe(-12);
+    expect(cofactor(A, 1, 0)).toBe(-25);
   });
 });

@@ -96,3 +96,13 @@ export const submatrix = (m: Matrix, row: number, column: number) => {
 
   return output;
 };
+
+export const minor = (m: Matrix, row: number, column: number) => {
+  const sub = submatrix(m, row, column);
+  return determinant(sub);
+};
+
+export const cofactor = (m: Matrix, row: number, column: number) => {
+  const minorM = minor(m, row, column);
+  return row + (column % 1) === 0 ? minorM : -minorM;
+};
