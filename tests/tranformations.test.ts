@@ -9,6 +9,7 @@ import {
   rotationY,
   rotationZ,
   scaling,
+  shearing,
   translation,
 } from "../src/transformation";
 import { radians } from "../src/utils/conversions";
@@ -113,4 +114,78 @@ describe("Tranformations", () => {
     expectCoordinateEquals(result1, expectedResult1);
     expectCoordinateEquals(result2, expectedResult2);
   });
+
+  it("A shearing transformation moves x in proportion to y", () => {
+    const transform = shearing(1, 0, 0, 0, 0, 0);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(5, 3, 4));
+  });
+
+  it("A shearing transformation moves x in proportion to z", () => {
+    const transform = shearing(0, 1, 0, 0, 0, 0);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(6, 3, 4));
+  });
+
+  it("A shearing transformation moves y in proportion to x", () => {
+    const transform = shearing(0, 0, 1, 0, 0, 0);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(2, 5, 4));
+  });
+
+  it("A shearing transformation moves y in proportion to z", () => {
+    const transform = shearing(0, 0, 0, 1, 0, 0);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(2, 7, 4));
+  });
+
+  it("A shearing transformation moves z in proportion to x", () => {
+    const transform = shearing(0, 0, 0, 0, 1, 0);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(2, 3, 6));
+  });
+
+  it("A shearing transformation moves z in proportion to y", () => {
+    const transform = shearing(0, 0, 0, 0, 0, 1);
+    const p = point(2, 3, 4);
+    const result = multiplyMatrixByCoordinate(transform, p);
+    expectCoordinateEquals(result, point(2, 3, 7));
+  });
+
+  it("Individual transformations are applied in sequence", () => {
+    const p = point(1, 0, 1);
+    const A = rotationX(radians(90));
+    const B = scaling(5, 5, 5);
+    const C = translation(10, 5, 7);
+
+    // Apply rotation first
+    const p2 = multiplyMatrixByCoordinate(A, p);
+    expectCoordinateEquals(p2, point(1, -1, 0));
+
+    // The apply scaling
+    const p3 = multiplyMatrixByCoordinate(B, p2);
+    expectCoordinateEquals(p3, point(5, -5, 0));
+
+    // The apply translation
+    const p4 = multiplyMatrixByCoordinate(C, p3);
+    expectCoordinateEquals(p4, point(15, 0, 7));
+  });
+
+  it("Chained transformations must be applied in reverse order", () => {
+    const p = point(1, 0, 1);
+    const A = rotationX(radians(90));
+    const B = scaling(5, 5, 5);
+    const C = translation(10, 5, 7);
+
+    const T = matrixMultiply(C, matrixMultiply(B, A));
+    const result = multiplyMatrixByCoordinate(T, p);
+    expectCoordinateEquals(result, point(15, 0, 7));
+  });
+
+  // TODO implement transform function and rewrite the above test
 });

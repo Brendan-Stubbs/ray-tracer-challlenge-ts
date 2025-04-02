@@ -52,3 +52,19 @@ export const rotationZ = (radians: number) => {
     [0, 0, 0, 1],
   ];
 };
+
+export const shearing = (
+  xy: number,
+  xz: number,
+  yx: number,
+  yz: number,
+  zx: number,
+  zy: number
+): Matrix => {
+  return [
+    [1, xy, xz, 0],
+    [yx, 1, yz, 0],
+    [zx, zy, 1, 0],
+    [0, 0, 0, 1],
+  ];
+};
