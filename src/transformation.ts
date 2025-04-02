@@ -115,3 +115,5 @@ export class Transform {
     return this.matrix;
   }
 }
+
+export const transform = () => new Transform();

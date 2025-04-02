@@ -10,6 +10,7 @@ import {
   rotationZ,
   scaling,
   shearing,
+  transform,
   Transform,
   translation,
 } from "../src/transformation";
@@ -180,7 +181,7 @@ describe("Tranformations", () => {
   it("Chained transformations must be applied in reverse order", () => {
     const p = point(1, 0, 1);
 
-    const T = new Transform()
+    const T = transform()
       .translate(10, 5, 7)
       .scale(5, 5, 5)
       .rotateX(radians(90))
