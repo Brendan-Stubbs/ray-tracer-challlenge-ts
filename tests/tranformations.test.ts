@@ -1,9 +1,5 @@
 import { point, vector } from "../src/coordinate";
-import {
-  inverse,
-  matrixMultiply,
-  multiplyMatrixByCoordinate,
-} from "../src/matrix";
+import { inverse, multiplyMatrixByCoordinate } from "../src/matrix";
 import {
   rotationX,
   rotationY,
@@ -11,7 +7,6 @@ import {
   scaling,
   shearing,
   transform,
-  Transform,
   translation,
 } from "../src/transformation";
 import { radians } from "../src/utils/conversions";
