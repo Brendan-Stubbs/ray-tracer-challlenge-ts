@@ -1,4 +1,4 @@
-import { Matrix } from "./matrix";
+import { IDENTITY_MATRIX, Matrix, matrixMultiply } from "./matrix";
 
 export const translation = (x: number, y: number, z: number): Matrix => {
   return [
@@ -68,3 +68,50 @@ export const shearing = (
     [0, 0, 0, 1],
   ];
 };
+
+export class Transform {
+  private readonly matrix: Matrix;
+
+  constructor(matrix: Matrix = IDENTITY_MATRIX) {
+    this.matrix = matrix;
+  }
+
+  apply(transform: Matrix): Transform {
+    return new Transform(matrixMultiply(this.matrix, transform));
+  }
+
+  translate(x: number, y: number, z: number): Transform {
+    return this.apply(translation(x, y, z));
+  }
+
+  scale(x: number, y: number, z: number): Transform {
+    return this.apply(scaling(x, y, z));
+  }
+
+  rotateX(radians: number): Transform {
+    return this.apply(rotationX(radians));
+  }
+
+  rotateY(radians: number): Transform {
+    return this.apply(rotationY(radians));
+  }
+
+  rotateZ(radians: number): Transform {
+    return this.apply(rotationZ(radians));
+  }
+
+  shear(
+    xy: number,
+    xz: number,
+    yx: number,
+    yz: number,
+    zx: number,
+    zy: number
+  ): Transform {
+    return this.apply(shearing(xy, xz, yx, yz, zx, zy));
+  }
+
+  getMatrix(): Matrix {
+    return this.matrix;
+  }
+}

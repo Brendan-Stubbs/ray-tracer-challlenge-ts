@@ -10,6 +10,7 @@ import {
   rotationZ,
   scaling,
   shearing,
+  Transform,
   translation,
 } from "../src/transformation";
 import { radians } from "../src/utils/conversions";
@@ -178,14 +179,14 @@ describe("Tranformations", () => {
 
   it("Chained transformations must be applied in reverse order", () => {
     const p = point(1, 0, 1);
-    const A = rotationX(radians(90));
-    const B = scaling(5, 5, 5);
-    const C = translation(10, 5, 7);
 
-    const T = matrixMultiply(C, matrixMultiply(B, A));
+    const T = new Transform()
+      .translate(10, 5, 7)
+      .scale(5, 5, 5)
+      .rotateX(radians(90))
+      .getMatrix();
+
     const result = multiplyMatrixByCoordinate(T, p);
     expectCoordinateEquals(result, point(15, 0, 7));
   });
-
-  // TODO implement transform function and rewrite the above test
 });
